@@ -12,8 +12,8 @@ class ObstacleManager:
 
     def update(self, game):
         if len(self.obstacles) == 0:
-            batata = randint(0,3)
-            if batata >= 2:
+            choice_obstacle = randint(0,3)
+            if choice_obstacle >= 2:
                 self.obstacles.append(Cactus(SMALL_CACTUS + LARGE_CACTUS))
             else:
                 self.obstacles.append(Bird(BIRD))
