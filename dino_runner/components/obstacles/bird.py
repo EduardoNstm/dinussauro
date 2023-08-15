@@ -14,8 +14,8 @@ class Bird(Obstacle):
             self.rect.y = 250
         elif bird_posicion == 2:
             self.rect.y =  320
-
         self.step_index = 0
+        
     def draw(self, screen):
         if self.step_index >= 10:
             self.step_index = 0
