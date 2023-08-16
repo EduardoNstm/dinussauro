@@ -1,8 +1,9 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+from dino_runner.components.power_up.power_up_manager import PowerUpManager
 from dino_runner.utils.text_utilites import draw_massage_components
 
 FONT_STYLE = "freesansbold.ttf"
@@ -24,6 +25,7 @@ class Game:
         self.y_pos_bg = 380
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
+        self.power_up_manager = PowerUpManager()
     
     def execute(self):
         self.running = True
@@ -38,11 +40,11 @@ class Game:
         self.game_speed = 20
         self.score = 0
         self.obstacle_manager.reset_obstacles()
+        self.power_up_manager.reset_power_ups()
         while self.playing:
             self.events()
             self.update()
             self.draw()
-
 
     def events(self):
         for event in pygame.event.get():
@@ -53,6 +55,7 @@ class Game:
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
+        self.power_up_manager.update(self)
         self.update_score()
     
 
@@ -61,14 +64,15 @@ class Game:
         if self.score % 100 == 0:
             self.game_speed += 5
 
-
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
+        self.power_up_manager.draw(self.screen)
         self.draw_score()
+        self.draw_power_up_time()
         pygame.display.update()
         pygame.display.flip()
 
@@ -89,6 +93,21 @@ class Game:
             pos_x_center= 1000,
             pos_y_center= 50,
         )
+
+    def draw_power_up_time(self):
+        if self.player.has_power_up:
+            time_to_show = round((self.draw_power_up_time + pygame.time.get_ticket()) / 1000, 1)
+            if time_to_show >= 0:
+                draw_massage_components(
+               f"{self.player.type.capitalize()} enable for {time_to_show} seconds",
+               self.screen,
+               font_size=18,
+               pos_x_center=500,
+               pos_y_center=40
+                )
+            else:
+                self.player.has_power_up = False
+                self.player.type = DEFAULT_TYPE
 
     def show_menu(self):
         self.screen.fill((255, 255, 255))
