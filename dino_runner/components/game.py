@@ -96,14 +96,14 @@ class Game:
 
     def draw_power_up_time(self):
         if self.player.has_power_up:
-            time_to_show = round((self.draw_power_up_time + pygame.time.get_ticket()) / 1000, 1)
+            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 1)
             if time_to_show >= 0:
                 draw_massage_components(
-               f"{self.player.type.capitalize()} enable for {time_to_show} seconds",
-               self.screen,
-               font_size=18,
-               pos_x_center=500,
-               pos_y_center=40
+                    f"{self.player.type.capitalize()} enabled for {time_to_show} seconds",
+                    self.screen,
+                    font_size=18,
+                    pos_x_center=500,
+                    pos_y_center=40
                 )
             else:
                 self.player.has_power_up = False
