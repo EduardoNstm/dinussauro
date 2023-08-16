@@ -70,6 +70,7 @@ class Dinosaur:
             self.dino_rect.y = Y_POS + 30
             self.step_index += 1
             dino_duck = False
+        
 
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
