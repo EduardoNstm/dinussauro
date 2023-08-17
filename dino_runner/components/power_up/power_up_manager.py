@@ -2,6 +2,7 @@ import random
 import pygame
 
 from dino_runner.components.power_up.shield import Shield
+from dino_runner.components.power_up.hummer import Hammer
 
 
 class PowerUpManager:
@@ -10,9 +11,10 @@ class PowerUpManager:
         self.when_appears = 0
 
     def generate_power_up(self, score):
+        power_up_type = [Shield(),Hammer()]
         if len(self.power_ups) == 0 and self.when_appears == score:
             self.when_appears += random.randint(200, 300)
-            self.power_ups.append(Shield())
+            self.power_ups.append(power_up_type[random.randint(0,1)])
 
     def update(self, game):
         self.generate_power_up(game.score)
@@ -21,6 +23,7 @@ class PowerUpManager:
             if game.player.dino_rect.colliderect(power_up.rect):
                 power_up.start_time = pygame.time.get_ticks()
                 game.player.shield = True
+                game.player.hummer = True
                 game.player.has_power_up = True
                 game.player.type = power_up.type
                 game.player.power_up_time = power_up.start_time + (power_up.duration * 1000)

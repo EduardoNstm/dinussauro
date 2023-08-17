@@ -7,7 +7,12 @@ from dino_runner.utils.constants import (
     JUMPING_SHIELD,
     DUCKING_SHIELD,
     DEFAULT_TYPE,
-    SHIELD_TYPE
+    SHIELD_TYPE,
+    HAMMER_TYPE,
+    HAMMER,
+    DUCKING_HAMMER,
+    RUNNING_HAMMER,
+    JUMPING_HAMMER
 )
 from pygame.sprite import Sprite
 from dino_runner.utils.joystick.joystick import Controler
@@ -20,17 +25,20 @@ JUMP_VEL = 8.5
 
 DUCK_IMG = {
     DEFAULT_TYPE : DUCKING,
-    SHIELD_TYPE : DUCKING_SHIELD
+    SHIELD_TYPE : DUCKING_SHIELD,
+    HAMMER_TYPE: DUCKING_HAMMER
     }
 
 JUMP_IMG = {
     DEFAULT_TYPE : JUMPING,
-    SHIELD_TYPE : JUMPING_SHIELD
+    SHIELD_TYPE : JUMPING_SHIELD,
+    HAMMER_TYPE: JUMPING_HAMMER
     }
 
 RUN_IMG = {
     DEFAULT_TYPE : RUNNING,
-    SHIELD_TYPE : RUNNING_SHIELD
+    SHIELD_TYPE : RUNNING_SHIELD,
+    HAMMER_TYPE: RUNNING_HAMMER
     }
 
 class Dinosaur:
@@ -47,7 +55,7 @@ class Dinosaur:
         self.dino_duck = False
         self.has_power_up = False
         self.shild = False
-        self.show_test = False
+        self.show_text = False 
         self.power_up_time = 0
         self.joystick = Controler()
 
@@ -84,7 +92,7 @@ class Dinosaur:
     def setup_state(self):
         self.has_power_up = False
         self.shild = False
-        self.show_test = False
+        self.show_text = False
         self.power_up_time = 0
 
     def run(self):
