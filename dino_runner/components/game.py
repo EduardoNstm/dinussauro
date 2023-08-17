@@ -8,9 +8,6 @@ from dino_runner.utils.text_utilites import draw_massage_components
 from dino_runner.utils.joystick.joystick import Controler
 
 
-FONT_STYLE = "freesansbold.ttf"
-TEXT_COLOR_BLACK = (0, 0, 0)
-
 class Game:
     def __init__(self):
         pygame.init()
@@ -118,7 +115,6 @@ class Game:
         self.screen.fill((255, 255, 255))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
-        high_score = 0
         if self.score > self.high_score:
             self.high_score = self.score
 
