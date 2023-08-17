@@ -1,5 +1,6 @@
 import pygame
 import os
+pygame.init()
 
 # Global Constants
 TITLE = "Chrome Dino Runner"
@@ -78,6 +79,20 @@ HAMMER = pygame.image.load(os.path.join(IMG_DIR, "Other/Hammer.png"))
 BG = pygame.image.load(os.path.join(IMG_DIR, "Other/Track.png"))
 HEART = pygame.image.load(os.path.join(IMG_DIR, "Other/SmallHeart.png"))
 
+BANANA_IMPORT = pygame.image.load(os.path.join(IMG_DIR, "Other/banana_jump.png"))
+BANANA_IMPORT_2 = pygame.image.load(os.path.join(IMG_DIR, "Other/banana_jum_2.png"))
+
+novo_tamanho = (120, 140)
+BANANA = [ 
+    pygame.transform.scale(BANANA_IMPORT, novo_tamanho),
+    pygame.transform.scale(BANANA_IMPORT_2, novo_tamanho)
+    ]
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 HAMMER_TYPE = "hammer"
+pygame.mixer.music.set_volume(0.09)
+SOUND_HACK = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sound/mensagem.wav"))
+SOUND_JUMP = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sound/pulo_1.wav"))
+SOUND_JUMP.set_volume(0.06)
+SOUND_MENU = pygame.mixer.music.load(os.path.join(IMG_DIR, "Sound/dino_senpai.mp3"))
+SOUND_MENU_START = pygame.mixer.music

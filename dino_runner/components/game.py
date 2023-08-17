@@ -1,11 +1,12 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, SOUND_MENU_START
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.power_up.power_up_manager import PowerUpManager
 from dino_runner.utils.text_utilites import draw_massage_components
 from dino_runner.utils.joystick.joystick import Controler
+
 
 FONT_STYLE = "freesansbold.ttf"
 TEXT_COLOR_BLACK = (0, 0, 0)
@@ -15,6 +16,7 @@ class Game:
         pygame.init()
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
+        SOUND_MENU_START.play(-1)
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.running = False
@@ -24,6 +26,7 @@ class Game:
         self.death_count = 0
         self.x_pos_bg = 0
         self.y_pos_bg = 380
+        self.high_score = 0
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
@@ -90,9 +93,9 @@ class Game:
 
     def draw_score(self):
         draw_massage_components(
-            f"Score: {self.score}", 
+            f" High Score: {self.high_score} || Score: {self.score}", 
             self.screen,
-            pos_x_center= 1000,
+            pos_x_center= 890,
             pos_y_center= 50,
         )
 
@@ -115,6 +118,9 @@ class Game:
         self.screen.fill((255, 255, 255))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
+        high_score = 0
+        if self.score > self.high_score:
+            self.high_score = self.score
 
         if self.death_count == 0:
             draw_massage_components(
@@ -122,13 +128,15 @@ class Game:
             self.screen,
         ) 
         else:
+            if self.score > self.high_score:
+                self.high_score = self.score
             draw_massage_components(
             "Press space or menu to restart", 
             self.screen,
             pos_y_center= half_screen_height + 140,
             )
             draw_massage_components(
-                f"Your score: {self.score}",
+                f"Yor High score: {self.high_score} || Your score: {self.score}",
                 self.screen,
                 pos_y_center= half_screen_height -150,
             )
