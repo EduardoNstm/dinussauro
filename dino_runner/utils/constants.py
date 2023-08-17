@@ -90,9 +90,9 @@ BANANA = [
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 HAMMER_TYPE = "hammer"
-pygame.mixer.music.set_volume(0.09)
+pygame.mixer.music.set_volume(0.3)
 SOUND_HACK = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sound/mensagem.wav"))
 SOUND_JUMP = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sound/pulo_1.wav"))
-SOUND_JUMP.set_volume(0.06)
+SOUND_JUMP.set_volume(0.4)
 SOUND_MENU = pygame.mixer.music.load(os.path.join(IMG_DIR, "Sound/dino_senpai.mp3"))
 SOUND_MENU_START = pygame.mixer.music

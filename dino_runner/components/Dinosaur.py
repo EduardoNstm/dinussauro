@@ -87,7 +87,6 @@ class Dinosaur:
             self.dino_run = False
             self.dino_duck = False
             self.dino_hack = False
-            SOUND_JUMP.play()
             self.cicle = 0
         elif user_input[pygame.K_DOWN] or button_duck and not self.dino_jump and not self.dino_hack:
             self.dino_jump = False
@@ -109,11 +108,7 @@ class Dinosaur:
             self.dino_duck = False
             self.dino_hack = False
             self.cicle = 0
-        
-
-
     
-
         if self.step_index >= 9:
             self.step_index = 0
 
@@ -133,6 +128,7 @@ class Dinosaur:
     def jump(self):
         self.image = JUMP_IMG[self.type]
         if self.dino_jump:
+            self.cicle = 0
             self.dino_rect.y -= self.jump_vel * 4
             self.jump_vel -= 0.8
 
