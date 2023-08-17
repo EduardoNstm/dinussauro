@@ -5,6 +5,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.power_up.power_up_manager import PowerUpManager
 from dino_runner.utils.text_utilites import draw_massage_components
+from dino_runner.utils.joystick.joystick import Controler
 
 FONT_STYLE = "freesansbold.ttf"
 TEXT_COLOR_BLACK = (0, 0, 0)
@@ -26,6 +27,7 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
+        self.joystick = Controler()
     
     def execute(self):
         self.running = True
@@ -116,12 +118,12 @@ class Game:
 
         if self.death_count == 0:
             draw_massage_components(
-            "Press any key to start", 
+            "Press space or Menu to start",
             self.screen,
         ) 
         else:
             draw_massage_components(
-            "Press any key to restart", 
+            "Press space or menu to restart", 
             self.screen,
             pos_y_center= half_screen_height + 140,
             )
@@ -145,4 +147,7 @@ class Game:
                 self.playing = False
                 self.running = False
             elif event.type == pygame.KEYDOWN:
-                self.run()
+                if event.key == pygame.K_SPACE:
+                    self.run()               
+            elif self.joystick.joystick.get_button(7):
+                self.run() 
